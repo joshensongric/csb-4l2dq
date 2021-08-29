@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VerifyPasscode</title>
+    <script src="https://build.weavr.io/app/secure/static/client.1.js"></script>
+  </head>
+  <body>
+    <!-- Define a form in which you will ask your customer to input their password -->
+    <div width="1px">
+      <form onSubmit="onSubmittt(); return false;">
+        <div id="password"></div>
+        <br />
+        <br />
+        <input type="submit" value="Verify" />
+      </form>
+
+      <script type="text/javascript">
+        // Initialise the UI library using your ui_key. Replace {{ui_key}} with your own UI key.
+        window.OpcUxSecureClient.init("08lh8V0130QBegcKUo0ADQ==");
+
+        // Create an instance of a secure form
+        var form = window.OpcUxSecureClient.form();
+
+        // Create an instance of a secure Password component that will collect the password
+        var input = form.input("p", "password", {
+          placeholder: "0000",
+          maxlength: 20
+        });
+
+        // Embed the secure Password component in the HTML element where you want
+        // the Password component to the shown on screen
+        input.mount(document.getElementById("password"));
+
+        // Define a function that will be executed when the form is submitted by the user
+        function onSubmit() {
+          // Get the tokenised version of the password inputted by your customer
+          form.tokenize(function (tokens) {
+            console.log(tokens);
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>
